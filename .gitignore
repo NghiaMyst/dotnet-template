@@ -1,0 +1,117 @@
+# ───────────────────────────────────────────────────────────────
+# .NET Core / .NET 8+ (hoạt động với mọi project bạn thêm sau này)
+# ───────────────────────────────────────────────────────────────
+
+.vs/
+
+## Ignore tất cả thư mục bin và obj của mọi project
+**/bin/
+**/obj/
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## .NET User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+## .NET Core / .NET CLI
+*.csproj.user
+*.sln.docstates
+.project
+*.cache
+*.tmp
+*.temp
+
+## Visual Studio / VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swn
+*.swo
+
+## Rider
+.idea/
+*.iml
+*.iws
+*.ipr
+
+## Dotnet build output
+artifacts/
+dist/
+publish/
+
+## Test results
+TestResults/
+*.trx
+
+## NuGet
+packages/
+*.nupkg
+*.snupkg
+# NuGet global packages folder (nếu bạn dùng global)
+global.json
+nuget.config
+# Nhưng không ignore file nuget.config ở root nếu bạn cần commit
+
+## ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+## Docker
+.dockerignore
+docker-compose.override.yml
+Dockerfile.*
+.docker/
+
+## Local environment files
+.env
+.env.local
+.env.*.local
+appsettings.Local.json
+appsettings.Development.json
+
+## Secrets & local certs
+secrets/
+*.pfx
+*.cer
+*.key
+
+## Terraform / Infra as code (nếu có)
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+## OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+## Temporary files
+*.tmp
+*.temp
+*~
+
+# End of file
