@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.5.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>5d4b7bde-9d2f-46bb-8413-50a82cbb68d9</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.1" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.1" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="13.0.1" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.0.1" />
+    <PackageReference Include="Aspire.Npgsql" Version="13.0.1" />
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.0.1" />
+    <PackageReference Include="Aspire.StackExchange.Redis" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\dotnet-boilderplate.DummyService\dotnet-boilderplate.DummyService.csproj" />
+  </ItemGroup>
+
+</Project>

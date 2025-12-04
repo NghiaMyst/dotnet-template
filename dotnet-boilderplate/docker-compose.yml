@@ -1,0 +1,54 @@
+﻿version: '3.8'
+
+services:
+  redis:
+    image: redis:7.4.1-alpine
+    container_name: redis-stable
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  rabbitmq:
+    image: rabbitmq:3.13.7-management-alpine
+    container_name: rabbitmq-stable
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: guest          # đổi thành user của bạn trong prod
+      RABBITMQ_DEFAULT_PASS: guest          # đổi thành password mạnh trong prod
+      # Hoặc tốt hơn: dùng file secrets hoặc .env
+      # RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      # RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_log:/var/log/rabbitmq
+    ports:
+      - "5672:5672"    # AMQP
+      - "15672:15672"  # Management UI
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  rabbitmq_log:
+    driver: local
+
+# Optional: nếu muốn dùng file .env để quản lý user/pass an toàn hơn
+# Tạo file .env trong cùng thư mục:
+# RABBITMQ_USER=your_username
+# RABBITMQ_PASS=your_very_strong_password
