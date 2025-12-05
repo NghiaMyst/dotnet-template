@@ -2,6 +2,8 @@
 # .NET Core / .NET 8+ (hoạt động với mọi project bạn thêm sau này)
 # ───────────────────────────────────────────────────────────────
 
+description.progress.md
+
 .vs/
 
 ## Ignore tất cả thư mục bin và obj của mọi project

@@ -8,6 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>5d4b7bde-9d2f-46bb-8413-50a82cbb68d9</UserSecretsId>
+
+	  <!-- thêm ngay dưới đây -->
+	  <EnableAspireSharedProjects>true</EnableAspireSharedProjects>
   </PropertyGroup>
 
   <ItemGroup>

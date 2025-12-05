@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/description-progress/">
+    <File Path="description.progress.md" />
+  </Folder>
   <Folder Name="/docker-compose/">
     <File Path="docker-compose.yml" />
   </Folder>
