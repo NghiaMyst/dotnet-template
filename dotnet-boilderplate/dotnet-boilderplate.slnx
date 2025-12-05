@@ -8,6 +8,7 @@
   <Folder Name="/src/">
     <Project Path="../dotnet-boilderplate.DummyService/dotnet-boilderplate.DummyService.csproj" />
     <Project Path="../dotnet-boilderplate.ServiceDefaults/dotnet-boilderplate.ServiceDefaults.csproj" />
+    <Project Path="../dotnet-boilderplate.ServiceDefaults/dotnet-boilderplate.SharedKernel.csproj" />
     <Project Path="dotnet-boilderplate.AppHost.csproj" />
   </Folder>
 </Solution>
