@@ -3,16 +3,13 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 #region SharedConfigs
 // Database Configuration
-var postgres = builder.AddPostgres("postgres")
-                        .WithImage("postgres", "17");
+var postgres = builder.AddConnectionString("postgres");
 
 // Message Queue
-var rabbitmq = builder.AddRabbitMQ("rabbitmq")
-       .WithImage("rabbitmq", "3-management");
+var rabbitmq = builder.AddConnectionString("rabbitmq");
 
 // Redis
-var redis = builder.AddRedis("cache")
-    .WithImage("redis", "7-alpine");
+var redis = builder.AddConnectionString("redis");
 #endregion
 
 #region ProjectsReference

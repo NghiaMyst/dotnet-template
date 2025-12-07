@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 1. Aspire auto-injects connection strings
 builder.AddNpgsqlDbContext<DummyDbContext>("postgres");
-builder.AddRedisClient("cache");
+builder.AddRedisClient("redis");
 builder.AddRabbitMQClient("rabbitmq");
 
 // 2. Add Default Service
