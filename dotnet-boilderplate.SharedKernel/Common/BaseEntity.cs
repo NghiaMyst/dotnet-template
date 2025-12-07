@@ -1,6 +1,6 @@
 ﻿namespace dotnet_boilderplate.SharedKernel.Common
 {
-    public abstract class BaseEntity<TId> where TId : struct
+    public abstract class BaseEntity<TId>
     {
         public TId Id { get; set; }
         private readonly List<IDomainEvent> _domainEvents = new();
