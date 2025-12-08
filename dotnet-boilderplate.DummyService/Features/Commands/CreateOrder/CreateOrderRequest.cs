@@ -7,5 +7,5 @@ namespace dotnet_boilderplate.DummyService.Features.Commands.CreateOrder
     {
     }
     public record CreateOrderItemDto(string ProductName, int Quantity, decimal UnitPrice, string Currency = "VND");
-    public record CreateOrderResponse(EntityId OrderId);
+    public record CreateOrderResponse(string OrderId);
 }

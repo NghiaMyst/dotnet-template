@@ -29,6 +29,15 @@ builder.Services.AddScoped<CreateOrderHandler>();
 
 builder.Services.AddSwaggerGen();
 
+// 4. Handle Format
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+
+        options.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.None;
+    });
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();

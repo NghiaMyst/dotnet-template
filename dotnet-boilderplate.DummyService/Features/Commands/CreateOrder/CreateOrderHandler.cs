@@ -42,7 +42,7 @@ namespace dotnet_boilderplate.DummyService.Features.Commands.CreateOrder
             //await _dbContext.SaveChangesAsync(ct);
 
             // Return
-            return Result.Success(new CreateOrderResponse(order.Id.Value));
+            return Result.Success(new CreateOrderResponse(order.Id.Value.ToString()));
         }
     }
 }
