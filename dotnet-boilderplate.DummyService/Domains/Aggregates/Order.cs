@@ -13,8 +13,6 @@ namespace dotnet_boilderplate.DummyService.Domains.Aggregates
         public OrderStatus Status { get; private set; } = OrderStatus.Pending;
         public Money TotalAmount { get; private set; } = Money.Zero;
 
-        private readonly List<OrderItem> _items = new();
-
         private Order() {}
 
         public static Result<Order> Create(CustomerId customerId, List<OrderItem> items)
@@ -30,8 +28,8 @@ namespace dotnet_boilderplate.DummyService.Domains.Aggregates
                 Status = OrderStatus.Pending
             };
 
-            order._items.AddRange(items);
             order.TotalAmount = items.Aggregate(Money.Zero, (sum, item) => sum + item.SubTotal);
+            order.SetCreated();
 
             order.AddDomainEvent(new OrderCreatedDomainEvent(order.Id, order.CustomerId, order.TotalAmount));
 

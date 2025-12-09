@@ -23,12 +23,12 @@ namespace dotnet_boilderplate.DummyService.Features.Commands.CreateOrder
             var customerId = CustomerId.From(request.CustomerId);
 
             var orderItems = request.Items
-            .Select(item => OrderItem.Create(
-                productName: item.ProductName,
-                quantity: item.Quantity,
-                unitPrice: new Money(item.UnitPrice, item.Currency)
-            ))
-            .ToList();
+                .Select(item => OrderItem.Create(
+                    productName: item.ProductName,
+                    quantity: item.Quantity,
+                    unitPrice: new Money(item.UnitPrice, item.Currency)
+                ))
+                .ToList();
 
             // Domain logic
             var orderResult = Order.Create(customerId, orderItems);
@@ -37,9 +37,16 @@ namespace dotnet_boilderplate.DummyService.Features.Commands.CreateOrder
 
             var order = orderResult.Value;
 
+            foreach (var item in orderItems)
+            {
+                item.SetOrderId(order.Id.ToString());
+                _logger.LogInformation("OrderItemCreated: {id}", item.Id.ToString());
+            }
+
             // Persist
-            //_dbContext.Orders.Add(order);
-            //await _dbContext.SaveChangesAsync(ct);
+            _dbContext.OrderItems.AddRange(orderItems);
+            _dbContext.Orders.Add(order);
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             // Return
             return Result.Success(new CreateOrderResponse(order.Id.Value.ToString()));

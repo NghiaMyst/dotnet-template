@@ -13,13 +13,32 @@ namespace dotnet_boilderplate.DummyService.Domains.Entities
 
         public Money SubTotal => UnitPrice * Quantity;
 
+        public string OrderId { get; private set; } = default!;
+
         public static OrderItem Create(string productName, int quantity, Money unitPrice)
-        => new()
         {
-            Id = EntityId.New(),
-            ProductName = productName,
-            Quantity = quantity,
-            UnitPrice = unitPrice
-        };
+            var item = new OrderItem()
+            {
+                Id = EntityId.New(),
+                ProductName = productName,
+                Quantity = quantity,
+                UnitPrice = unitPrice
+            };
+
+            item.SetCreated();
+
+            return item;
+        }
+
+        public void UpdateQuantity(int quantity, string? updatedBy = null)
+        {
+            Quantity = quantity;
+            SetUpdated(updatedBy);
+        }
+
+        public void SetOrderId(string orderId)
+        {
+            OrderId = orderId;
+        }
     }
 }
