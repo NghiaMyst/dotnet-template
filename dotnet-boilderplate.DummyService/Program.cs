@@ -1,4 +1,5 @@
 using dotnet_boilderplate.DummyService.Features.Commands.CreateOrder;
+using dotnet_boilderplate.DummyService.Features.Queries.GetOrderById;
 using dotnet_boilderplate.DummyService.Persistence;
 using dotnet_boilderplate.ServiceDefaults.Extensions;
 using FluentValidation;
@@ -25,11 +26,15 @@ builder.AddServiceDefaults();
 
 // 3. Validation
 builder.Services.AddValidatorsFromAssemblyContaining<CreateOrderValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetOrderByIdValidator>();
+
+// 4. Hanlder
 builder.Services.AddScoped<CreateOrderHandler>();
+builder.Services.AddScoped<GetOrderByIdHandler>();
 
 builder.Services.AddSwaggerGen();
 
-// 4. Handle Format
+// 5. Handle Format
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
     {
@@ -45,5 +50,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapCreateOrderEndpoint();
+app.MapGetOrderByIdEndpoint();
 
 app.Run();
