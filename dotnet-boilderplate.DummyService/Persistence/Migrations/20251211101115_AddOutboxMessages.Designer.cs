@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using dotnet_boilderplate.DummyService.Persistence;
@@ -11,9 +12,11 @@ using dotnet_boilderplate.DummyService.Persistence;
 namespace dotnet_boilderplate.DummyService.Persistence.Migrations
 {
     [DbContext(typeof(DummyDbContext))]
-    partial class DummyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251211101115_AddOutboxMessages")]
+    partial class AddOutboxMessages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
