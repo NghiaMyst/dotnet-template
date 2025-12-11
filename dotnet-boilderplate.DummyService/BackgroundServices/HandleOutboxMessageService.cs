@@ -21,9 +21,9 @@ namespace dotnet_boilderplate.DummyService.BackgroundServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                using var scope = _serviceProvider.CreateScope();
-                var dbContext = _serviceProvider.GetRequiredService<DummyDbContext>();
-                var publisher = _serviceProvider.GetRequiredService<IDomainEventPublisher>();
+                await using var scope = _serviceProvider.CreateAsyncScope();
+                var dbContext = scope.ServiceProvider.GetRequiredService<DummyDbContext>();
+                var publisher = scope.ServiceProvider.GetRequiredService<IDomainEventPublisher>();
 
                 var unhandledMessages = await dbContext.OutboxMessages
                     .Where(m => m.Published == false)
