@@ -31,10 +31,12 @@ namespace dotnet_boilderplate.DummyService.Domains.Aggregates
             order.TotalAmount = items.Aggregate(Money.Zero, (sum, item) => sum + item.SubTotal);
             order.SetCreated();
 
-            order.AddDomainEvent(new OrderCreatedDomainEvent(order.Id, order.CustomerId, order.TotalAmount));
+            order.AddDomainEvent(new OrderCreatedDomainEvent(order.Id, order.CustomerId, order.TotalAmount, DateTime.UtcNow));
 
             return Result.Success(order);
         }
+
+        public void RaiseOrderCreated() => AddDomainEvent(new OrderCreatedDomainEvent(Id, CustomerId, TotalAmount, DateTime.UtcNow));
 
         public void Confirm()
         {

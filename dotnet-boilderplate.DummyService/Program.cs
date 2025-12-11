@@ -1,7 +1,10 @@
+using dotnet_boilderplate.DummyService.BackgroundServices;
 using dotnet_boilderplate.DummyService.Features.Commands.CreateOrder;
 using dotnet_boilderplate.DummyService.Features.Queries.GetOrderById;
+using dotnet_boilderplate.DummyService.Messaging;
 using dotnet_boilderplate.DummyService.Persistence;
 using dotnet_boilderplate.ServiceDefaults.Extensions;
+using dotnet_boilderplate.SharedKernel.Messaging;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +35,10 @@ builder.Services.AddValidatorsFromAssemblyContaining<GetOrderByIdValidator>();
 builder.Services.AddScoped<CreateOrderHandler>();
 builder.Services.AddScoped<GetOrderByIdHandler>();
 
+// 5. Messaging
+builder.Services.AddScoped<IDomainEventPublisher, RmqDomainEventPublisher>();
+builder.Services.AddHostedService<HandleOutboxMessageService>();
+
 builder.Services.AddSwaggerGen();
 
 // 5. Handle Format
@@ -49,6 +56,7 @@ app.MapDefaultEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+// Minimal API
 app.MapCreateOrderEndpoint();
 app.MapGetOrderByIdEndpoint();
 

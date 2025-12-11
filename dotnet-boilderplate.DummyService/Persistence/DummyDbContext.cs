@@ -9,6 +9,7 @@ namespace dotnet_boilderplate.DummyService.Persistence
     {
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<OrderItem> OrderItems => Set<OrderItem>(); 
+        public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
         public DummyDbContext(DbContextOptions options) : base(options) {}
 
@@ -21,10 +22,23 @@ namespace dotnet_boilderplate.DummyService.Persistence
         {
             var now = DateTime.UtcNow;
             var currentUser = "current-user";
+            var outboxMessages = new List<OutboxMessage>();
 
             // TODO: need monitoring 
             foreach (var entry in ChangeTracker.Entries<BaseEntity<EntityId>>())
             {
+                if (entry.Entity.DomainEvents.Any())
+                {
+                    foreach (var domainEvent in entry.Entity.DomainEvents)
+                    {
+                        var outboxMessage = new OutboxMessage(domainEvent);
+                        outboxMessage.SetCreated();
+                        outboxMessages.Add(outboxMessage);
+                    }
+
+                    entry.Entity.ClearDomainEvents();
+                }
+
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -36,6 +50,7 @@ namespace dotnet_boilderplate.DummyService.Persistence
                 }
             }
 
+            OutboxMessages.AddRange(outboxMessages);
             return await base.SaveChangesAsync(cancellationToken);
         }
 
