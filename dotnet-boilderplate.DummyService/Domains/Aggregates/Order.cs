@@ -29,6 +29,7 @@ namespace dotnet_boilderplate.DummyService.Domains.Aggregates
             };
 
             order.TotalAmount = items.Aggregate(Money.Zero, (sum, item) => sum + item.SubTotal);
+
             order.SetCreated();
 
             order.AddDomainEvent(new OrderCreatedDomainEvent(order.Id, order.CustomerId, order.TotalAmount, DateTime.UtcNow));

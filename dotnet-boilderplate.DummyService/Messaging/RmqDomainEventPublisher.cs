@@ -88,8 +88,9 @@ public sealed class RmqDomainEventPublisher : IDomainEventPublisher, IAsyncDispo
             }
 
             // Close connection
-            await _connection.CloseAsync(cancellationToken: default);
-            await _connection.DisposeAsync();
+            // Connection dispose will be handled by app
+            //await _connection.CloseAsync(cancellationToken: default);
+            //await _connection.DisposeAsync();
         }
         catch (Exception ex)
         {

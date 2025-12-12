@@ -36,7 +36,7 @@ builder.Services.AddScoped<CreateOrderHandler>();
 builder.Services.AddScoped<GetOrderByIdHandler>();
 
 // 5. Messaging
-builder.Services.AddScoped<IDomainEventPublisher, RmqDomainEventPublisher>();
+builder.Services.AddSingleton<IDomainEventPublisher, RmqDomainEventPublisher>();
 builder.Services.AddHostedService<HandleOutboxMessageService>();
 
 builder.Services.AddSwaggerGen();

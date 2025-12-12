@@ -19,8 +19,10 @@ namespace dotnet_boilderplate.DummyService.BackgroundServices
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+
             while (!stoppingToken.IsCancellationRequested)
             {
+                _logger.LogInformation("BackgroundService Running");
                 await using var scope = _serviceProvider.CreateAsyncScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<DummyDbContext>();
                 var publisher = scope.ServiceProvider.GetRequiredService<IDomainEventPublisher>();
@@ -31,9 +33,11 @@ namespace dotnet_boilderplate.DummyService.BackgroundServices
                     .Take(100)
                     .ToListAsync(stoppingToken);
 
-                if (unhandledMessages.Count <= 0) return;
-
-                // Published through publisher
+                if (unhandledMessages.Count <= 0)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+                    continue;
+                }
 
                 foreach (var message in unhandledMessages)
                 {
@@ -53,7 +57,7 @@ namespace dotnet_boilderplate.DummyService.BackgroundServices
                         await dbContext.SaveChangesAsync(stoppingToken);
                     }
 
-                    await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+                    await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
                 }
 
             }

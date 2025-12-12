@@ -1,6 +1,11 @@
-﻿namespace dotnet_boilderplate.SharedKernel.Common
+﻿
+using dotnet_boilderplate.SharedKernel.Utils;
+using Newtonsoft.Json;
+
+namespace dotnet_boilderplate.SharedKernel.Common
 {
-    public readonly record struct EntityId
+    [JsonConverter(typeof(EntityIdJsonConverter))]
+    public sealed class EntityId : ValueObject
     {
         private readonly Guid _Id;
 
@@ -15,7 +20,13 @@
         public static EntityId New() => new(Guid.NewGuid());
         public static EntityId From(string value) => new(value);
         public override string ToString() => _Id.ToString();
+
+
         public static implicit operator string(EntityId id) => id._Id.ToString();
+        protected override IEnumerable<object?> GetEqualityComponents()
+        {
+           yield return _Id;
+        }
     }
 
     // EntityId acts as a data holder, based on strong typedId pattern

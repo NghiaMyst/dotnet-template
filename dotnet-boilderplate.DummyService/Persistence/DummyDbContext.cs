@@ -25,7 +25,7 @@ namespace dotnet_boilderplate.DummyService.Persistence
             var outboxMessages = new List<OutboxMessage>();
 
             // TODO: need monitoring 
-            foreach (var entry in ChangeTracker.Entries<BaseEntity<EntityId>>())
+            foreach (var entry in ChangeTracker.Entries<RootBaseEntity>())
             {
                 if (entry.Entity.DomainEvents.Any())
                 {
