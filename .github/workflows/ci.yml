@@ -13,14 +13,21 @@ jobs:
   
     steps:
     - uses: actions/checkout@v4
+      with:
+          fetch-depth: 0
 
     - name: Setup .NET 10
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '10.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Restore (with solution if exists)
+      run: |
+        if [ -f "*.sln" ]; then
+          dotnet restore
+        else
+          dotnet restore ./dotnet-boilderplate/dotnet-boilderplate.slnx
+        fi
 
     - name: Build
       run: dotnet build -no--restore --configuration Release
