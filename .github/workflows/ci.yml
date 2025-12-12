@@ -30,7 +30,7 @@ jobs:
         fi
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build ./dotnet-boilderplate/dotnet-boilderplate.slnx --no-restore --configuration Release
 
     - name: Test (skip if no tests)
       run: dotnet test --no-build --configuration Release || echo "No tests found - skipping"
