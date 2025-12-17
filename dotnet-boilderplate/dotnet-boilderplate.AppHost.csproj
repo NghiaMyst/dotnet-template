@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\dotnet-boilderplate.DummyService\dotnet-boilderplate.DummyService.csproj" />
     <ProjectReference Include="..\dotnet-boilderplate.YummyService\dotnet-boilderplate.YummyService.csproj" />
+    <ProjectReference Include="..\dotnet-template.AuthService\dotnet-template.AuthService.csproj" />
   </ItemGroup>
 
 </Project>

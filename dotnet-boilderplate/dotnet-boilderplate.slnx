@@ -10,6 +10,7 @@
     <Project Path="../dotnet-boilderplate.ServiceDefaults/dotnet-boilderplate.ServiceDefaults.csproj" />
     <Project Path="../dotnet-boilderplate.SharedKernel/dotnet-boilderplate.SharedKernel.csproj" />
     <Project Path="../dotnet-boilderplate.YummyService/dotnet-boilderplate.YummyService.csproj" />
+    <Project Path="../dotnet-template.AuthService/dotnet-template.AuthService.csproj" />
     <Project Path="dotnet-boilderplate.AppHost.csproj" />
   </Folder>
 </Solution>

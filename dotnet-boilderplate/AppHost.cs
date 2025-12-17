@@ -20,6 +20,9 @@ builder.AddProject<Projects.dotnet_boilderplate_DummyService>("dotnet-boilderpla
 
 builder.AddProject<Projects.dotnet_boilderplate_YummyService>("dotnet-boilderplate-yummyservice")
     .WithReference(rabbitmq);
+
+builder.AddProject<Projects.dotnet_template_AuthService>("dotnet-template-authservice");
+
 #endregion
 
 builder.Build().Run();
