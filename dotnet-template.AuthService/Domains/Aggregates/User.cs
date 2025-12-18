@@ -2,7 +2,7 @@
 using dotnet_boilderplate.SharedKernel.Results;
 using dotnet_template.AuthService.Domains.ValueObjects;
 
-namespace dotnet_template.AuthService.Domains.Aggregates.User
+namespace dotnet_template.AuthService.Domains.Aggregates
 {
     public class User : BaseEntity<UserId>
     {

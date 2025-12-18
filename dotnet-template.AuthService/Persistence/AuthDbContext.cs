@@ -1,5 +1,5 @@
 ﻿using dotnet_boilderplate.SharedKernel.Common;
-using dotnet_template.AuthService.Domains.Aggregates.User;
+using dotnet_template.AuthService.Domains.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_template.AuthService.Persistence

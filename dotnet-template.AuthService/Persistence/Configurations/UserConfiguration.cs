@@ -1,4 +1,4 @@
-﻿using dotnet_template.AuthService.Domains.Aggregates.User;
+﻿using dotnet_template.AuthService.Domains.Aggregates;
 using dotnet_template.AuthService.Domains.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
