@@ -1,6 +1,7 @@
 ﻿using dotnet_boilderplate.SharedKernel.Results;
 using dotnet_template.AuthService.Domains.Aggregates;
 using dotnet_template.AuthService.Persistence;
+using dotnet_template.AuthService.Persistence.Utils;
 
 namespace dotnet_template.AuthService.Features.Commands.RegisterUser
 {
@@ -19,7 +20,7 @@ namespace dotnet_template.AuthService.Features.Commands.RegisterUser
         public async Task<Result<RegisterUserResponse>> Handle(RegisterUserRequest request, CancellationToken cancellation)
         {
 
-            var hassPassword = HashPassword(request.Password);
+            var hassPassword = PasswordUtils.HashPassword(request.Password);
 
             var userResult = User.Create(request.Email, request.Password);
 
@@ -34,13 +35,6 @@ namespace dotnet_template.AuthService.Features.Commands.RegisterUser
             //var token = JwtGenerator.GenerateToken(user);
 
             return Result.Success<RegisterUserResponse>(new RegisterUserResponse(user.Email));
-        }
-
-        private string HashPassword(string password)
-        {
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
-
-            return passwordHash;
         }
     }
 }
