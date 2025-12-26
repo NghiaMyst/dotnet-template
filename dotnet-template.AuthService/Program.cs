@@ -1,5 +1,7 @@
 using dotnet_boilderplate.ServiceDefaults.Extensions;
+using dotnet_template.AuthService.Features.Commands.RegisterUser;
 using dotnet_template.AuthService.Persistence;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,13 +29,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// Config Validator
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
+
+// Config Handler
+builder.Services.AddScoped<RegisterUserHandler>();
+
 builder.Services.AddAuthorization();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Map endpoint
+app.MapRegisterUserEndpoint();
 
 app.Run();
