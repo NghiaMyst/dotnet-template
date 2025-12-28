@@ -20,9 +20,9 @@ namespace dotnet_template.AuthService.Features.Commands.RegisterUser
         public async Task<Result<RegisterUserResponse>> Handle(RegisterUserRequest request, CancellationToken cancellation)
         {
 
-            var hassPassword = PasswordUtils.HashPassword(request.Password);
+            var hashPassword = PasswordUtils.HashPassword(request.Password);
 
-            var userResult = User.Create(request.Email, request.Password);
+            var userResult = User.Create(request.Email, hashPassword);
 
             if (userResult.IsFailure)
                 return Result.Failure<RegisterUserResponse>(userResult.Error);

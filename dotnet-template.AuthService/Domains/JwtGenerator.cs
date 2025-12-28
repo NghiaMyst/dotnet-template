@@ -8,7 +8,7 @@ namespace dotnet_template.AuthService.Domains
 {
     public static class JwtGenerator
     {
-        private static readonly string _key = "_nghiant";
+        private static readonly string _key = "7p9zBvE6xN8mK2qR5wL4nH1jG3sA9dB7eC0uI2oP5tY=";
         private static readonly string _issuer = "_nghiant";
         private static readonly string _audience = "_nghiant";
 
