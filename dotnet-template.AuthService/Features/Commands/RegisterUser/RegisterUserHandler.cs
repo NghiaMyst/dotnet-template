@@ -30,6 +30,12 @@ namespace dotnet_template.AuthService.Features.Commands.RegisterUser
 
             var user = userResult.Value;
 
+            // TODO: Remove
+            if (user.Email.Contains("nghia"))
+            {
+                user.AddRole(RoleTypes.Admin);
+            }
+
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync(cancellation);
 

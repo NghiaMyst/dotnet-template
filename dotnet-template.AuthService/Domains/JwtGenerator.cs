@@ -1,4 +1,5 @@
 ﻿using dotnet_template.AuthService.Domains.Aggregates;
+using dotnet_template.AuthService.Persistence.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -24,6 +25,9 @@ namespace dotnet_template.AuthService.Domains
             };
 
             claims.AddRange(user.Roles.Select(r => new Claim(ClaimTypes.Role, r)));
+
+            var permissions = RolePermissions.GetAllPermissions(user.Roles);
+            claims.AddRange(permissions.Select(p => new Claim("Permissions", p)));
 
             var token = new JwtSecurityToken(
                 issuer: _issuer,

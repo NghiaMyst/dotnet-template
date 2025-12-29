@@ -3,10 +3,10 @@ using dotnet_template.AuthService.Features.Commands.GetUsers;
 using dotnet_template.AuthService.Features.Commands.LoginWithPassword;
 using dotnet_template.AuthService.Features.Commands.RegisterUser;
 using dotnet_template.AuthService.Persistence;
+using dotnet_template.AuthService.Persistence.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using System.Text;
@@ -27,11 +27,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
+            //ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            //ValidAudience = builder.Configuration["Jwt:Audience"],
+            //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
+            ValidIssuer = "_nghiant",
+            ValidAudience = "_nghiant",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("7p9zBvE6xN8mK2qR5wL4nH1jG3sA9dB7eC0uI2oP5tY="))
         };
     });
+
+builder.AddCustomAuthorization();
 
 // Config Validator
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
@@ -60,7 +65,7 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
     {
-        [new OpenApiSecuritySchemeReference("bearer", document)] = []
+        [new OpenApiSecuritySchemeReference("Bearer", document)] = []
     });
 });
 

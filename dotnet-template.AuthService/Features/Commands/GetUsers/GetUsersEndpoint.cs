@@ -1,6 +1,5 @@
 ﻿using dotnet_boilderplate.ServiceDefaults.Extensions;
-using dotnet_template.AuthService.Features.Commands.LoginWithPassword;
-using Microsoft.AspNetCore.Mvc;
+using dotnet_template.AuthService.Persistence.Authorization;
 
 namespace dotnet_template.AuthService.Features.Commands.GetUsers
 {
@@ -13,7 +12,8 @@ namespace dotnet_template.AuthService.Features.Commands.GetUsers
                 .WithTags("Users")
                 .Produces<GetUsersResponse>(201)
                 .ProducesValidationProblem(400)
-                .ProducesProblem(400); ;
+                .ProducesProblem(400)
+                .RequireAuthorization(Policies.CanViewUsers);
 
             return builder;
         }
