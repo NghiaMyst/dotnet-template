@@ -9,11 +9,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+	  <Compile Remove="SharedEntities\**" />
+	  <EmbeddedResource Remove="SharedEntities\**" />
+	  <None Remove="SharedEntities\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="SharedEntities\" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>
 
 </Project>

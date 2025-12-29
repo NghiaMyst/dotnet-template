@@ -45,7 +45,7 @@ namespace dotnet_template.AuthService.Domains.Aggregates
 
         public void AddRole(RoleTypes role)
         {
-            if (!Enum.IsDefined(typeof(RoleTypes), role))
+            if (!Enum.IsDefined(role))
             {
                 Roles ??= [];
                 Roles.Add(role.ToString());
@@ -55,6 +55,8 @@ namespace dotnet_template.AuthService.Domains.Aggregates
 
     public enum RoleTypes 
     { 
-        User
+        User,
+        Admin,
+        Moderator
     }
 }

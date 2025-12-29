@@ -1,4 +1,5 @@
 ﻿using dotnet_boilderplate.SharedKernel.Results;
+using dotnet_template.AuthService.Domains;
 using dotnet_template.AuthService.Domains.Aggregates;
 using dotnet_template.AuthService.Persistence;
 using dotnet_template.AuthService.Persistence.Utils;
@@ -32,9 +33,9 @@ namespace dotnet_template.AuthService.Features.Commands.RegisterUser
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync(cancellation);
 
-            //var token = JwtGenerator.GenerateToken(user);
+            var token = JwtGenerator.GenerateToken(user);
 
-            return Result.Success<RegisterUserResponse>(new RegisterUserResponse(user.Email));
+            return Result.Success<RegisterUserResponse>(new RegisterUserResponse(user.Email, token));
         }
     }
 }

@@ -1,4 +1,5 @@
 using dotnet_boilderplate.ServiceDefaults.Extensions;
+using dotnet_template.AuthService.Features.Commands.GetUsers;
 using dotnet_template.AuthService.Features.Commands.LoginWithPassword;
 using dotnet_template.AuthService.Features.Commands.RegisterUser;
 using dotnet_template.AuthService.Persistence;
@@ -35,10 +36,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Config Validator
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginWithPasswordValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetUsersValidator>();
 
 // Config Handler
 builder.Services.AddScoped<RegisterUserHandler>();
 builder.Services.AddScoped<LoginWithPasswordHandler>();
+builder.Services.AddScoped<GetUsersHandler>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddSwaggerGen(c =>
@@ -73,5 +76,6 @@ app.UseAuthorization();
 // Map endpoint
 app.MapRegisterUserEndpoint();
 app.MapLoginWithPassword();
+app.MapGetUsers();
 
 app.Run();
