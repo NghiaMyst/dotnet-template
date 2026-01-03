@@ -11,6 +11,7 @@
     <Project Path="../dotnet-boilderplate.SharedKernel/dotnet-boilderplate.SharedKernel.csproj" />
     <Project Path="../dotnet-boilderplate.YummyService/dotnet-boilderplate.YummyService.csproj" />
     <Project Path="../dotnet-template.AuthService/dotnet-template.AuthService.csproj" />
+    <Project Path="../dotnet-template.ConsoleTestFunc/dotnet-template.ConsoleTestFunc.csproj" Id="69a5449d-0b2e-438f-9cb2-b83d24d15454" />
     <Project Path="dotnet-boilderplate.AppHost.csproj" />
   </Folder>
 </Solution>
