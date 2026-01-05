@@ -17,6 +17,15 @@ namespace dotnet_template.AuthService.Persistence.Extensions
                 .AddPolicy(Policies.CanViewUsers, policy => policy.RequireClaim("Permissions", Permissions.Users_View));
 
             builder.Services.AddAuthorizationBuilder()
+                .AddPolicy(Policies.CanCreateUsers, policy => policy.RequireClaim("Permissions", Permissions.Users_Create));
+
+            builder.Services.AddAuthorizationBuilder()
+                .AddPolicy(Policies.CanUpdateUsers, policy => policy.RequireClaim("Permissions", Permissions.Users_Update));
+
+            builder.Services.AddAuthorizationBuilder()
+                .AddPolicy(Policies.CanDeleteUsers, policy => policy.RequireClaim("Permissions", Permissions.Users_Delete));
+
+            builder.Services.AddAuthorizationBuilder()
                 .AddPolicy(Policies.CanManageUsers, 
                     policy => policy.RequireClaim("Permissions", 
                         Permissions.Users_View, 

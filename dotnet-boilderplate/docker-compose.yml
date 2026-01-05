@@ -17,6 +17,18 @@ services:
       retries: 5
       start_period: 10s
 
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    restart: unless-stopped
+    ports:
+      - "5540:5540"          # Web UI
+    volumes:
+      - redisinsight_data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+
   rabbitmq:
     image: rabbitmq:3.13.7-management-alpine
     container_name: rabbitmq-stable
@@ -46,6 +58,8 @@ volumes:
   rabbitmq_data:
     driver: local
   rabbitmq_log:
+    driver: local
+  redisinsight_data: 
     driver: local
 
 # Optional: nếu muốn dùng file .env để quản lý user/pass an toàn hơn
