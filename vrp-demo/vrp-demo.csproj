@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>vrp_demo</RootNamespace>
+  </PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.0.2" />
+		<PackageReference Include="Aspire.RabbitMQ.Client" Version="13.0.2" />
+		<PackageReference Include="Aspire.StackExchange.Redis" Version="13.0.2" />
+		<PackageReference Include="FluentValidation" Version="12.1.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+    <ProjectReference Include="..\dotnet-boilderplate.ServiceDefaults\dotnet-boilderplate.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\dotnet-boilderplate.SharedKernel\dotnet-boilderplate.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domains\" />
+    <Folder Include="Features\" />
+    <Folder Include="Persistence\" />
+  </ItemGroup>
+
+</Project>

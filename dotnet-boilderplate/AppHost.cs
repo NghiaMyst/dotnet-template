@@ -13,16 +13,18 @@ var redis = builder.AddConnectionString("redis");
 #endregion
 
 #region ProjectsReference
-builder.AddProject<Projects.dotnet_boilderplate_DummyService>("dotnet-boilderplate-dummyservice")
-    .WithReference(rabbitmq)
-    .WithReference(postgres)
-    .WithReference(redis);
+//builder.AddProject<Projects.dotnet_boilderplate_DummyService>("dotnet-boilderplate-dummyservice")
+//    .WithReference(rabbitmq)
+//    .WithReference(postgres)
+//    .WithReference(redis);
 
-builder.AddProject<Projects.dotnet_boilderplate_YummyService>("dotnet-boilderplate-yummyservice")
-    .WithReference(rabbitmq);
+//builder.AddProject<Projects.dotnet_boilderplate_YummyService>("dotnet-boilderplate-yummyservice")
+//    .WithReference(rabbitmq);
+
+builder.AddProject<Projects.vrp_demo>("vrp-demo")
+    .WithReference(redis);
 
 builder.AddProject<Projects.dotnet_template_AuthService>("dotnet-template-authservice");
 
 #endregion
-
 builder.Build().Run();
