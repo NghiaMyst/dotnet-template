@@ -1,7 +1,10 @@
 using dotnet_boilderplate.ServiceDefaults.Extensions;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using vrp_demo.Endpoints;
+using vrp_demo.Features.Commands.Drivers.CreateDriver;
 using vrp_demo.Features.Commands.Skills.CreateSkill;
+using vrp_demo.Features.Queries.Skills.GetSkills;
 using vrp_demo.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,9 +22,12 @@ builder.AddServiceDefaults();
 
 // 3. Validation
 builder.Services.AddValidatorsFromAssemblyContaining<CreateSkillValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetSkillsValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateDriverValidator>();
 
 // 4. Hanlder
 builder.Services.AddScoped<CreateSkillHandler>();
+builder.Services.AddScoped<GetSkillsHandler>();
 
 builder.Services.AddSwaggerGen();
 
@@ -39,5 +45,8 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
+
+// 6. Endpoints
+app.MapSkillsEndpoints();
 
 app.Run();

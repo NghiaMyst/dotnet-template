@@ -2,5 +2,5 @@
 {
     public record CreateSkillRequest(string Name, string? Description);
 
-    public record CreateSkillResponse(Guid skillId);
+    public record CreateSkillResponse(Guid SkillId);
 }

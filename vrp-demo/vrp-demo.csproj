@@ -29,8 +29,9 @@
     <ProjectReference Include="..\dotnet-boilderplate.SharedKernel\dotnet-boilderplate.SharedKernel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domains\Entities\" />
-  </ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Domains\Entities\" />
+	</ItemGroup>
 
 </Project>

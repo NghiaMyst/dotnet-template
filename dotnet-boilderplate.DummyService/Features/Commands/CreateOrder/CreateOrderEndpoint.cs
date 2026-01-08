@@ -1,5 +1,5 @@
-﻿using dotnet_boilderplate.ServiceDefaults.Extensions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using dotnet_boilderplate.ServiceDefaults.Extensions;
 
 namespace dotnet_boilderplate.DummyService.Features.Commands.CreateOrder;
 
@@ -36,7 +36,7 @@ public static class CreateOrderEndpoint
 
         // 3. Return
         return result.Match(
-            success => Results.Created($"/orders/{success.OrderId}", success),
+            success => Results.Created($"/skills/{success.OrderId}", success),
             failure => failure.ToProblemDetails()
         );
     }
