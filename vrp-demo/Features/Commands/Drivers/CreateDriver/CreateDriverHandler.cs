@@ -1,6 +1,7 @@
 ﻿using dotnet_boilderplate.SharedKernel.Results;
 using dotnet_boilderplate.SharedKernel.Utils;
 using vrp_demo.Domains.Aggregates;
+using vrp_demo.Domains.Enums;
 using vrp_demo.Persistence;
 
 namespace vrp_demo.Features.Commands.Drivers.CreateDriver

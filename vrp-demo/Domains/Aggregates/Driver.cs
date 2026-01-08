@@ -1,6 +1,7 @@
 ﻿using dotnet_boilderplate.SharedKernel.Common;
 using dotnet_boilderplate.SharedKernel.Results;
 using NetTopologySuite.Geometries;
+using vrp_demo.Domains.Enums;
 
 namespace vrp_demo.Domains.Aggregates
 {
@@ -37,11 +38,5 @@ namespace vrp_demo.Domains.Aggregates
             return Result<Driver>.Success(driver);
         }
         
-    }
-
-    public enum RoleType
-    {
-        Administrator,
-        Driver
     }
 }
