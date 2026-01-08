@@ -31,6 +31,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateDriverValidator>();
 // 4. Hanlder
 builder.Services.AddScoped<CreateSkillHandler>();
 builder.Services.AddScoped<GetSkillsHandler>();
+builder.Services.AddScoped<CreateDriverHandler>();
 
 builder.Services.AddSwaggerGen();
 
@@ -51,5 +52,6 @@ app.UseSwaggerUI();
 
 // 6. Endpoints
 app.MapSkillsEndpoints();
+app.MapDriverEndpoints();
 
 app.Run();
