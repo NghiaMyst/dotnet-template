@@ -2,27 +2,26 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using vrp_demo.Persistence;
 
 #nullable disable
 
-namespace vrp_demo.Persistence
+namespace vrp_demo.Persistence.Migrations
 {
     [DbContext(typeof(VrpDbContext))]
-    [Migration("20260108015752_InitDb")]
-    partial class InitDb
+    partial class VrpDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "postgis");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("vrp_demo.Domains.Aggregates.Driver", b =>
@@ -45,13 +44,10 @@ namespace vrp_demo.Persistence
                         .HasColumnType("character varying(100)")
                         .HasColumnName("created_by");
 
-                    b.Property<double>("Lat")
-                        .HasColumnType("double precision")
-                        .HasColumnName("lat");
-
-                    b.Property<double>("Lng")
-                        .HasColumnType("double precision")
-                        .HasColumnName("lng");
+                    b.Property<Point>("Location")
+                        .IsRequired()
+                        .HasColumnType("geography (point, 4326)")
+                        .HasColumnName("location");
 
                     b.Property<string>("Name")
                         .IsRequired()

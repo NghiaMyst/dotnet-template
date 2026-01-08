@@ -2,24 +2,28 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using vrp_demo.Persistence;
 
 #nullable disable
 
-namespace vrp_demo.Persistence
+namespace vrp_demo.Persistence.Migrations
 {
     [DbContext(typeof(VrpDbContext))]
-    partial class VrpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260108175719_CreatePostGis")]
+    partial class CreatePostGis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "postgis");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("vrp_demo.Domains.Aggregates.Driver", b =>

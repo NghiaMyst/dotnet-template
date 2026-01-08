@@ -14,7 +14,10 @@ var postgresConn = builder.Configuration.GetConnectionString("postgres");
 
 builder.Services.AddDbContext<VrpDbContext>(options =>
 {
-    options.UseNpgsql(postgresConn);
+    options.UseNpgsql(postgresConn, x =>
+    {
+        x.UseNetTopologySuite();
+    });
 });
 
 // 2. Add Default Service

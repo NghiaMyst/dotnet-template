@@ -1,5 +1,6 @@
 ﻿using dotnet_boilderplate.SharedKernel.Common;
 using dotnet_boilderplate.SharedKernel.Results;
+using NetTopologySuite.Geometries;
 
 namespace vrp_demo.Domains.Aggregates
 {
@@ -12,9 +13,7 @@ namespace vrp_demo.Domains.Aggregates
 
         public string Address { get; private set; } = String.Empty;
 
-        public double Lat { get; private set; }
-
-        public double Lng { get; private set; }
+        public Point Location { get; private set; }
 
         public List<Guid> SkillIds { get; private set; } = [];
 
@@ -28,8 +27,7 @@ namespace vrp_demo.Domains.Aggregates
             {
                 Name = name,
                 Address = address,
-                Lat = lat,
-                Lng = lng,
+                Location = new Point(lng, lat),
                 SkillIds = skillIds ?? [],
                 Role = role.ToString()
             };

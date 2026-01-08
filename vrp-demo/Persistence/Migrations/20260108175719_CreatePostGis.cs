@@ -3,14 +3,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace vrp_demo.Persistence
+namespace vrp_demo.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDb : Migration
+    public partial class CreatePostGis : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:PostgresExtension:postgis", ",,");
+
             migrationBuilder.CreateTable(
                 name: "driver",
                 columns: table => new

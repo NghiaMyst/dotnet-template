@@ -21,11 +21,9 @@ namespace vrp_demo.Persistence.Configurations
                 .HasColumnName("address")
                 .HasColumnType("text");
 
-            builder.Property(p => p.Lat)
-                .HasColumnName("lat");
-
-            builder.Property(p => p.Lng)
-                .HasColumnName("lng");
+            builder.Property(p => p.Location)
+                .HasColumnName("location")
+                .HasColumnType("geography (point, 4326)");
 
             builder.Property(p => p.Role)
                 .HasColumnName("role")
