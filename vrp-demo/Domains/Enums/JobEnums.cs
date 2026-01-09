@@ -5,4 +5,19 @@
         Service = 1,
         Shipment = 2
     }
+
+    public enum ShipmentType
+    {
+        Pick = 0,
+        Drop = 1
+    }
+
+    public enum TaskStatus
+    {
+        New = 0,
+        Scheduled = 1,
+        InProgress = 2,
+        Completed = 3,
+        Cancelled = 4
+    }
 }

@@ -20,12 +20,28 @@ namespace vrp_demo.Domains.Entities
 
         public DateTime EndDt { get; private set; }
 
+        public List<Guid> RequiredSkills { get; private set; } = [];
+
+        public Guid JobId { get; private set; }
+
+        public Enums.TaskStatus Status { get; private set; }
+
+        public int ServiceTime { get; private set; }
+
         #region ServiceProperty
 
         #endregion
 
         #region ShipmentProperty
+        public int? Capacity { get; private set; }
 
+        public ShipmentType? ShipmentType { get; private set; }
+        #endregion
+
+        #region AfterOptimization
+        public DateTime? ExpectedArrival { get; private set; }
+
+        public double? Distance { get; private set; }
         #endregion
     }
 }
