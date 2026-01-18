@@ -1,5 +1,7 @@
 ﻿using dotnet_boilderplate.ServiceDefaults.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Prometheus;
+using System.Xml.Linq;
 
 namespace dotnet_boilderplate.DummyService.Features.Commands.CreateOrder;
 
@@ -36,9 +38,22 @@ public static class CreateOrderEndpoint
 
         // 3. Return
         return result.Match(
-            success => Results.Created($"/orders/{success.OrderId}", success),
-            failure => failure.ToProblemDetails()
-        );
+            success =>
+            {
+                CreateOrderClickCounter.WithLabels("1", "success").Inc();
+                return Results.Created($"/orders/{success.OrderId}", success);
+            },
+            failure =>
+            {
+                CreateOrderClickCounter.WithLabels("0", "failure").Inc();
+                return failure.ToProblemDetails();
+            });
     }
+
+    private static readonly Counter CreateOrderClickCounter
+        = Metrics.CreateCounter("create_order_counter", "numbers of clicks create order api", new CounterConfiguration()
+        {
+            LabelNames = ["order_id", "order_name"]
+        });
 }
 

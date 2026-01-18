@@ -7,6 +7,7 @@ using dotnet_boilderplate.ServiceDefaults.Extensions;
 using dotnet_boilderplate.SharedKernel.Messaging;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,11 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
+
+// Monitoring test
+app.UseHttpMetrics();
+
+app.MapMetrics();
 
 // Minimal API
 app.MapCreateOrderEndpoint();
