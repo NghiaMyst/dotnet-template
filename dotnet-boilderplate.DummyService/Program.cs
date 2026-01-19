@@ -2,11 +2,15 @@ using dotnet_boilderplate.DummyService.BackgroundServices;
 using dotnet_boilderplate.DummyService.Features.Commands.CreateOrder;
 using dotnet_boilderplate.DummyService.Features.Queries.GetOrderById;
 using dotnet_boilderplate.DummyService.Messaging;
+using dotnet_boilderplate.DummyService.Middlewares;
 using dotnet_boilderplate.DummyService.Persistence;
+using dotnet_boilderplate.DummyService.Persistence.Services;
+using dotnet_boilderplate.ServiceDefaults.Contracts;
 using dotnet_boilderplate.ServiceDefaults.Extensions;
 using dotnet_boilderplate.SharedKernel.Messaging;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +24,11 @@ builder.Services.AddDbContext<DummyDbContext>(options =>
     options.UseNpgsql(postgresConn);
 });
 
-builder.AddRedisClient(redisConn);
+builder.AddRedisClient("redis");
 builder.AddRabbitMQClient(rabbitmqConn);
 
+// Add Rate Limit Handler 
+builder.Services.AddSingleton<IRateLimitService, SlidingWindowStrategy>();
 
 // 2. Add Default Service
 builder.AddServiceDefaults();
@@ -55,6 +61,16 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseRouting();
+
+// Monitoring test
+app.UseHttpMetrics();
+
+app.UseMiddleware<RateLimitingMiddleware>();
+
+// Expose endpoint metrics
+app.MapMetrics();
 
 // Minimal API
 app.MapCreateOrderEndpoint();
