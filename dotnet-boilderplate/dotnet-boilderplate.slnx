@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/docker-compose/">
     <File Path="docker-compose.yml" />
+    <File Path="prometheus.yml" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="../dotnet-boilderplate.DummyService/dotnet-boilderplate.DummyService.csproj" />
