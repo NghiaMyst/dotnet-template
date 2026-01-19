@@ -21,7 +21,7 @@ namespace vrp_demo.Persistence
 
         public DbSet<Job> Jobs { get; set; }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Domains.Entities.Task> Tasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

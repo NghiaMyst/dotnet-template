@@ -23,6 +23,7 @@
 
     public enum JobType
     {
+        Unknown = 0, // expect only appear in database error
         Service = 1,
         Shipment = 2,
     }

@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using vrp_demo.Endpoints;
 using vrp_demo.Features.Commands.Drivers.CreateDriver;
+using vrp_demo.Features.Commands.Jobs.CreateJob;
 using vrp_demo.Features.Commands.Skills.CreateSkill;
 using vrp_demo.Features.Queries.Skills.GetSkills;
 using vrp_demo.Persistence;
@@ -27,6 +28,7 @@ builder.AddServiceDefaults();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateSkillValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<GetSkillsValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateDriverValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateJobValidator>();
 
 // 4. Hanlder
 builder.Services.AddScoped<CreateSkillHandler>();
@@ -53,5 +55,6 @@ app.UseSwaggerUI();
 // 6. Endpoints
 app.MapSkillsEndpoints();
 app.MapDriverEndpoints();
+app.MapJobsEndpoints();
 
 app.Run();
