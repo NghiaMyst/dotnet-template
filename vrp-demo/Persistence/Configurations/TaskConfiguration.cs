@@ -10,7 +10,9 @@ namespace vrp_demo.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Domains.Entities.Task> builder)
         {
-            var converter = new EnumToStringConverter<JobType>();
+            var taskTypeConverter = new EnumToStringConverter<TaskType>();
+            var taskStatusConverter = new EnumToStringConverter<Domains.Enums.TaskStatus>();
+            var shipmentTypeConverter = new EnumToStringConverter<ShipmentType>();
 
             builder.ToTable("task");
 
@@ -31,18 +33,18 @@ namespace vrp_demo.Persistence.Configurations
             builder.Property(x => x.TaskType)
                 .HasColumnName("task_type")
                 .HasColumnType("text")
-                .HasConversion(converter);
+                .HasConversion(taskTypeConverter);
 
             builder.Property(p => p.Location)
                 .HasColumnName("location")
                 .HasColumnType("geography (point, 4326)");
 
             builder.Property(o => o.StartDt)
-                .HasColumnName("created_at")
+                .HasColumnName("start_dt")
                 .HasColumnType("timestamptz");
 
             builder.Property(o => o.EndDt)
-                .HasColumnName("created_at")
+                .HasColumnName("end_dt")
                 .HasColumnType("timestamptz");
 
             builder.Property(p => p.RequiredSkills)
@@ -58,7 +60,7 @@ namespace vrp_demo.Persistence.Configurations
             builder.Property(x => x.Status)
                 .HasColumnName("status")
                 .HasColumnType("text")
-                .HasConversion(converter);
+                .HasConversion(taskStatusConverter);
 
             builder.Property(o => o.JobId)
                 .HasColumnName("job_id");
@@ -74,7 +76,7 @@ namespace vrp_demo.Persistence.Configurations
             builder.Property(o => o.ShipmentType)
                 .HasColumnName("shipment_type")
                 .HasColumnType("text")
-                .HasConversion(converter)
+                .HasConversion(shipmentTypeConverter)
                 .IsRequired(false);
 
             builder.Property(o => o.Distance)

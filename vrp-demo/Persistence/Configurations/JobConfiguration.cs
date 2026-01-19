@@ -11,7 +11,9 @@ namespace vrp_demo.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Job> builder)
         {
-            var converter = new EnumToStringConverter<JobType>();
+            var jobTypeConverter = new EnumToStringConverter<JobType>();
+            var jobStatus = new EnumToStringConverter<JobStatus>();
+
 
             builder.ToTable("job");
 
@@ -24,12 +26,12 @@ namespace vrp_demo.Persistence.Configurations
             builder.Property(o => o.JobType)
                 .HasColumnName("job_type")
                 .HasColumnType("text")
-                .HasConversion(converter);
+                .HasConversion(jobTypeConverter);
 
             builder.Property(o => o.JobStatus)
                 .HasColumnName("job_status")
                 .HasColumnType("text")
-                .HasConversion(converter);
+                .HasConversion(jobStatus);
 
             builder.Property(o => o.Code)
                 .HasColumnName("code")
