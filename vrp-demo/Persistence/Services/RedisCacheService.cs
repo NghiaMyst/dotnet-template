@@ -19,6 +19,7 @@ namespace vrp_demo.Persistence.Services
             _logger = logger;
         }
 
+        #region Basic Functions
         public async Task<T?> GetAsync<T>(string key)
         {
             var value = await _db.StringGetAsync(key);
@@ -41,7 +42,6 @@ namespace vrp_demo.Persistence.Services
             }
         }
 
-
         public async Task<bool> SetAsync<T>(string key, T value, TimeSpan? expiration = null)
         {
             var stringValue = JsonConvert.SerializeObject(value);
@@ -56,7 +56,9 @@ namespace vrp_demo.Persistence.Services
                 return false;
             }
         }
+        #endregion
 
+        #region Hash Set Object
         public async Task<T> HashGetAsync<T>(string key) where T : class, new()
         {
             var entries = await _db.HashGetAllAsync(key);
@@ -97,5 +99,31 @@ namespace vrp_demo.Persistence.Services
         {
             await _db.HashSetAsync(key, fieldName, value?.ToString());
         }
+        #endregion
+
+        #region List entities with ids
+        public async Task HashSetListAsync<T>(string key, List<T> entities, TimeSpan? expiration = null) where T : class
+        {
+            if (entities == null || !entities.Any()) return;
+
+            var idProperty = typeof(T).GetProperty("id") ?? typeof(T).GetProperty("Id");
+
+            if (idProperty == null) return;
+
+            var entries = entities.Select(entity =>
+            {
+                var idValue = idProperty.GetValue(entity)?.ToString() ?? Guid.NewGuid().ToString();
+                var jsonValue = JsonConvert.SerializeObject(entity);
+                return new HashEntry(idValue, jsonValue);
+            }).ToArray();
+
+            await _db.HashSetAsync(key, entries);
+
+            if (expiration.HasValue)
+            {
+                await _db.KeyExpireAsync(key, expiration);
+            }
+        }
+        #endregion
     }
 }
