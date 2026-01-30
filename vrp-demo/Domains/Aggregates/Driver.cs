@@ -37,6 +37,35 @@ namespace vrp_demo.Domains.Aggregates
 
             return Result<Driver>.Success(driver);
         }
+
+        public Result AddSkills(List<Guid> skillIds)
+        {
+            if (skillIds == null || skillIds.Count == 0)
+                return Result.Failure(Error.Validation("Skill IDs cannot be empty"));
+
+            foreach (var skillId in skillIds)
+            {
+                if (!SkillIds.Contains(skillId))
+                {
+                    SkillIds.Add(skillId);
+                }
+            }
+
+            return Result.Success();
+        }
+
+        public Result Update(string name, string address, double lat, double lng, RoleType role)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return Result.Failure(Error.Validation("Name cannot be empty"));
+
+            Name = name;
+            Address = address;
+            Location = new Point(lng, lat);
+            Role = role.ToString();
+
+            return Result.Success();
+        }
         
     }
 }

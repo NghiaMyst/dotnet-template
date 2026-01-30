@@ -37,7 +37,7 @@ public static class CreateSkillEndpoint
 
         // 3. Return
         return result.Match(
-            success => Results.Created($"/orders/{success.SkillId}", success),
+            success => Results.Created($"/skills/{success.SkillId}", success),
             failure => failure.ToProblemDetails()
         );
     }
