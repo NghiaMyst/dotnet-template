@@ -32,6 +32,8 @@ namespace vrp_demo.Domains.Aggregates
                 JobStatus = JobStatus.New
             };
 
+            job.Tasks ??= [];
+
             switch (jobType)
             {
                 case JobType.Service:
