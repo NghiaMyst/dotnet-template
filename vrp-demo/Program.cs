@@ -26,6 +26,13 @@ builder.Services.AddDbContext<VrpDbContext>(options =>
     });
 });
 
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new NetTopologySuite.IO.Converters.GeoJsonConverterFactory());
+
+    options.SerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+});
+
 // 2. Add Default Service
 builder.AddServiceDefaults();
 
